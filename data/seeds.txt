@@ -1,0 +1,17 @@
+# Real Bitcoin seed addresses, all tagged in the GraphSense TagPacks repo.
+# Picked because they have on-chain activity (so the crawl produces a
+# non-trivial subgraph) but not so much that the demo blows up.
+#
+# Selection: see notebooks/01_proof_of_funds.ipynb section "Picking seeds".
+
+# Locky ransomware payment addresses (ransomware.yaml)
+1L7BisPWjZQ7hvXiirDmgydc6zKtFPXANw
+14CkwUznVHGM6nTXbrxbVtNdPXoojoVFeu
+12BCVTUtBhDJ6BEToBkUJjS6pcC8iC7kih
+
+# Investment / gift-btc scams (scams.yaml)
+12uDk9BctF2ywXz4qpGxJSprXG3uUD6Mda
+1JyRhM9ndcqacWkJRRnn2mbmQZ3XxcN7wy
+
+# Bitfinex 2016 hack address (service_hack)
+16t35Fhe2HqKN5XT2ocEd9Fe3eKm5UhRcm

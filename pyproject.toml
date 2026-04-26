@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pof"
+version = "0.1.0"
+description = "Proof of Funds — risk quantification demo for Bitcoin transactions"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "scipy>=1.11",
+    "networkx>=3.1",
+    "pyyaml>=6.0",
+    "requests>=2.31",
+    "requests-cache>=1.1",
+    "pyarrow>=14.0",
+]
+
+[project.optional-dependencies]
+notebook = ["jupyter", "matplotlib", "seaborn"]
+dev = ["pytest>=7.4", "pytest-cov"]
+
+[project.scripts]
+pof-precompute = "pof.precompute:main"
+
+[tool.setuptools.packages.find]
+include = ["pof*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
