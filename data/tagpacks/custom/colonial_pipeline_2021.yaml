@@ -1,0 +1,11 @@
+title: Colonial Pipeline / DarkSide Ransomware 2021
+creator: DOJ Seizure Affidavit & Elliptic Analysis
+source: https://www.justice.gov/opa/pr/department-justice-seizes-23-million-cryptocurrency-paid-ransomware-extortionists-darkside
+currency: BTC
+category: ransomware
+abuse: ransomware
+confidence: forensic_investigation
+tags:
+  - address: bc1qq2euq8pw950klpjcawuy4uj39ym43hs6cfsegq
+    label: "Colonial Pipeline ransom - DarkSide affiliate wallet (FBI seized)"
+    source: https://www.elliptic.co/blog/us-authorities-seize-darkside

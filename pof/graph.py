@@ -53,11 +53,15 @@ def edge_list(txs: Iterable[Tx]) -> pd.DataFrame:
 def build_graph(
     txs: Iterable[Tx],
     tags: pd.DataFrame | None = None,
+    clusters: dict[str, str] | None = None,
 ) -> nx.DiGraph:
     """Build a `networkx.DiGraph` from transactions, optionally annotated with tags.
 
     Edges carry ``value_sat`` (sum across contributing tx) and ``tx_count``.
     Nodes carry ``label``, ``category``, ``abuse``, ``severity`` if a tag exists.
+
+    If *clusters* is provided (address -> entity representative mapping), the
+    returned graph operates at entity level via :func:`pof.clustering.collapse_graph`.
     """
     edges = edge_list(txs)
     g = nx.DiGraph()
@@ -91,6 +95,10 @@ def build_graph(
     # Default severity 0.0 for untagged nodes; helpful for downstream metrics.
     for n, data in g.nodes(data=True):
         data.setdefault("severity", 0.0)
+
+    if clusters:
+        from pof.clustering import collapse_graph
+        g = collapse_graph(g, clusters)
 
     return g
 

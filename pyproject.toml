@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pof"
-version = "0.1.0"
+version = "0.2.0"
 description = "Proof of Funds — risk quantification demo for Bitcoin transactions"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -22,7 +22,9 @@ dependencies = [
 
 [project.optional-dependencies]
 notebook = ["jupyter", "matplotlib", "seaborn"]
+dashboard = ["streamlit>=1.30", "pyvis>=0.3"]
 dev = ["pytest>=7.4", "pytest-cov"]
+all = ["pof[notebook,dashboard,dev]"]
 
 [project.scripts]
 pof-precompute = "pof.precompute:main"

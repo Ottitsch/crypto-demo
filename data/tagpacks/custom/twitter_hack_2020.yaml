@@ -1,0 +1,17 @@
+title: Twitter Hack 2020 - Bitcoin Scam Addresses
+creator: DOJ Criminal Complaint (Northern District of California)
+source: https://www.justice.gov/opa/press-release/file/1300261/download
+currency: BTC
+category: scam
+abuse: scam
+confidence: forensic_investigation
+tags:
+  - address: bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh
+    label: "Twitter hack 2020 primary scam address"
+    source: https://www.justice.gov/opa/press-release/file/1300261/download
+  - address: bc1q0kznuxzk6d82e27p7gplwl68zkv40swyy4d24x
+    label: "Twitter hack 2020 secondary scam address"
+    source: https://www.justice.gov/opa/press-release/file/1300261/download
+  - address: bc1qwr30ddc04zqp878c0evdrqfx564mmf0dy2w39l
+    label: "Twitter hack 2020 tertiary scam address"
+    source: https://www.justice.gov/opa/press-release/file/1300261/download

@@ -15,6 +15,7 @@ from pathlib import Path
 
 import pandas as pd
 
+from pof.clustering import cluster_addresses
 from pof.explorer import Explorer, crawl_neighborhood
 from pof.graph import build_graph
 from pof.metrics import aggregate_score, direct_exposure, distance_to_tainted, haircut_taint
@@ -57,6 +58,7 @@ def run(
     hops: int,
     max_tx_per_addr: int,
     offline: bool,
+    entity_clustering: bool = True,
 ) -> pd.DataFrame:
     log = logging.getLogger("pof.precompute")
 
@@ -77,13 +79,19 @@ def run(
     )
     log.info("collected %d transactions", len(txs))
 
-    g = build_graph(txs, tags=tags)
+    clusters = None
+    if entity_clustering:
+        clusters = cluster_addresses(txs)
+        n_entities = len(set(clusters.values()))
+        log.info("clustered %d addresses into %d entities", len(clusters), n_entities)
+
+    g = build_graph(txs, tags=tags, clusters=clusters)
     log.info("graph: %d nodes, %d edges", g.number_of_nodes(), g.number_of_edges())
 
     scores = score_graph(g)
     out.parent.mkdir(parents=True, exist_ok=True)
     scores.to_parquet(out)
-    log.info("wrote %d scored addresses to %s", len(scores), out)
+    log.info("wrote %d scored nodes to %s", len(scores), out)
     return scores
 
 
@@ -95,6 +103,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p.add_argument("--hops", type=int, default=2, help="BFS depth around seeds.")
     p.add_argument("--max-tx-per-addr", type=int, default=25, help="Cap transactions fetched per address.")
     p.add_argument("--offline", action="store_true", help="Only use the explorer cache; never hit the network.")
+    p.add_argument("--no-clustering", action="store_true", help="Disable entity clustering (address-level only).")
     p.add_argument("-v", "--verbose", action="store_true")
     return p.parse_args(argv)
 
@@ -119,6 +128,7 @@ def main(argv: list[str] | None = None) -> int:
         hops=args.hops,
         max_tx_per_addr=args.max_tx_per_addr,
         offline=args.offline,
+        entity_clustering=not args.no_clustering,
     )
     return 0
 
